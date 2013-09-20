@@ -10,7 +10,7 @@ namespace Zotca.Vbc.Comm
     /// <summary>
     /// 내부에서 암호화를 수행하여 서버와 통신합니다.
     /// </summary>
-    public class HttpRequestClient
+    public class ArthurHttpRequestClient
     {
         private string mHost;
         private ushort mPort;
@@ -26,7 +26,7 @@ namespace Zotca.Vbc.Comm
         /// <summary>
         /// 기본값으로 지정된 서버로 접속하는 클라이언트를 만듭니다.
         /// </summary>
-        public HttpRequestClient()
+        public ArthurHttpRequestClient()
         {
             Initialize("ma.actoz.com", 10001);
         }
@@ -35,7 +35,7 @@ namespace Zotca.Vbc.Comm
         /// 특정 호스트와 기본값으로 지정된 포트를 사용해 서버로 접속하는 클라이언트를 만듭니다.
         /// </summary>
         /// <param name="host">접속할 호스트입니다.</param>
-        public HttpRequestClient(string host)
+        public ArthurHttpRequestClient(string host)
         {
             Initialize(host, 10001);
         }
@@ -45,7 +45,7 @@ namespace Zotca.Vbc.Comm
         /// </summary>
         /// <param name="host">접속할 호스트입니다.</param>
         /// <param name="port">접속할 포트입니다.</param>
-        public HttpRequestClient(string host, ushort port)
+        public ArthurHttpRequestClient(string host, ushort port)
         {
             Initialize(host, port);
         }
