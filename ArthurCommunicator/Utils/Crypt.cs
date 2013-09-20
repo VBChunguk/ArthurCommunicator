@@ -95,7 +95,8 @@ namespace Zotca.Vbc.Comm.Utils
                 }
                 else
                 {
-                    b64Transform.TransformBlock(val, p, b64Transform.InputBlockSize, outputBuffer, 0);
+                    read = b64Transform.InputBlockSize;
+                    b64Transform.TransformBlock(val, p, read, outputBuffer, 0);
                     b64FinishedStream.Write(outputBuffer, 0, b64Transform.OutputBlockSize);
                 }
                 p += read;
