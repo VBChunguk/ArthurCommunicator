@@ -125,7 +125,7 @@ namespace Zotca.Vbc.Comm
         /// <returns>요청에 대한 응답입니다.</returns>
         public byte[] RequestPost(string endpoint, Dictionary<string, string> args)
         {
-            HttpWebRequest req = HttpWebRequest.Create("http://" + mHost + endpoint + "?cyt=1") as HttpWebRequest;
+            HttpWebRequest req = HttpWebRequest.Create(string.Format("http://{0}:{1}{2}", mHost, mPort, endpoint)) as HttpWebRequest;
             {
                 Dictionary<string, string> convertedArgs = new Dictionary<string, string>();
                 if (args != null)
