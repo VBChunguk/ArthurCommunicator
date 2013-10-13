@@ -10,6 +10,16 @@ namespace Zotca.Vbc.Comm.Utils
     public static class Crypt
     {
         /// <summary>
+        /// 암호화와 복호화에 사용되는 기본 키입니다.
+        /// </summary>
+        public static string DefaultKey = "011218525486l6u1";
+
+        /// <summary>
+        /// check_inspection 요청에 사용되는 키입니다.
+        /// </summary>
+        public static string CheckInspectionKey = "skdnuCme11part29";
+
+        /// <summary>
         /// 바이트 배열로부터 데이터를 복호화합니다.
         /// </summary>
         /// <param name="data">복호화할 바이트 배열입니다.</param>
@@ -27,9 +37,20 @@ namespace Zotca.Vbc.Comm.Utils
         /// <returns>복호화된 데이터입니다.</returns>
         public static byte[] Decrypt(Stream data)
         {
+            return Decrypt(data, DefaultKey);
+        }
+
+        /// <summary>
+        /// 지정된 키를 사용하여 System.IO.Stream으로부터 데이터를 복호화합니다.
+        /// </summary>
+        /// <param name="data">복호화할 System.IO.Stream입니다.</param>
+        /// <param name="key">복호화에 사용할 키입니다.</param>
+        /// <returns>복호화된 데이터입니다.</returns>
+        public static byte[] Decrypt(Stream data, string key)
+        {
             Aes aes = Aes.Create();
             aes.IV = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            aes.Key = Encoding.ASCII.GetBytes("rBwj1MIAivVN011i");
+            aes.Key = Encoding.ASCII.GetBytes(key);
             aes.Padding = PaddingMode.PKCS7;
             aes.Mode = CipherMode.ECB;
             ICryptoTransform aesTransform = aes.CreateDecryptor();
@@ -57,7 +78,7 @@ namespace Zotca.Vbc.Comm.Utils
         {
             Aes aes = Aes.Create();
             aes.IV = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            aes.Key = Encoding.ASCII.GetBytes("rBwj1MIAivVN011i");
+            aes.Key = Encoding.ASCII.GetBytes(DefaultKey);
             aes.Padding = PaddingMode.PKCS7;
             aes.Mode = CipherMode.ECB;
             ICryptoTransform aesTransform = aes.CreateEncryptor();

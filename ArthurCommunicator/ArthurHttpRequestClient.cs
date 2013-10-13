@@ -59,7 +59,7 @@ namespace Zotca.Vbc.Comm
         {
             mHost = host;
             mPort = port;
-            mAppVersion = 103;
+            mAppVersion = 104;
             mDeviceName = mProductName = mOSVersion = mFingerprint = string.Empty;
             mCookie = string.Empty;
         }
@@ -150,7 +150,11 @@ namespace Zotca.Vbc.Comm
             mCookie = responseObj.Headers.Get("Set-Cookie");
 
             Stream stream = responseObj.GetResponseStream();
-            byte[] response = Utils.Crypt.Decrypt(stream);
+            byte[] response;
+            if (endpoint.Contains("check_inspection"))
+                response = Utils.Crypt.Decrypt(stream, Utils.Crypt.CheckInspectionKey);
+            else
+                response = Utils.Crypt.Decrypt(stream);
             if (responseObj.ContentEncoding != null && responseObj.ContentEncoding.Contains("gzip"))
             {
                 try
